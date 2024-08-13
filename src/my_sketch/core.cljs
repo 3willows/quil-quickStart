@@ -9,7 +9,7 @@
   (q/color-mode :hsb)
   ; setup function returns initial state. It contains
   ; circle color and position.
-  {:color 0
+  {:color 1
    :angle 0})
 
 (defn update-state [state]
@@ -30,13 +30,15 @@
     (q/with-translation [(/ (q/width) 2)
                          (/ (q/height) 2)]
       ; Draw the circle.
-      (q/ellipse x y 100 100))))
+      (q/triangle x y (* x x) (* y y) (- x 100) (- y 100))
+      
+      )))
 
 ; this function is called in index.html
 (defn ^:export run-sketch []
   (q/defsketch my-sketch
     :host "my-sketch"
-    :size [500 500]
+    :size [600 500]
     ; setup function called only once, during sketch initialization.
     :setup setup
     ; update-state is called on each iteration before draw-state.
@@ -48,4 +50,4 @@
     :middleware [m/fun-mode]))
 
 ; uncomment this line to reset the sketch:
- (run-sketch)
+ ;(run-sketch)
